@@ -1,1 +1,5 @@
+<div class="alerts-container" *ngIf="alerts.length > 0">
+    <app-alert *ngFor="let alert of alerts" [alert]="alert"></app-alert>
+</div>
+
 <router-outlet></router-outlet>
