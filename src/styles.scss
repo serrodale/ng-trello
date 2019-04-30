@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #3d3f50;
+    font-family: 'Nunito Sans';
+    -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*:before, *:after {
+    box-sizing: inherit;
+}
