@@ -8,10 +8,12 @@ import { RegisterComponent } from './pages/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingDirective } from './directives/loading.directive';
 import { AlertComponent } from './components/alert/alert.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     AlertComponent,
     LoadingDirective,
     RegisterComponent,
