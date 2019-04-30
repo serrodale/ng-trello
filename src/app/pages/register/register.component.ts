@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserForm } from 'src/app/model/user.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +15,9 @@ export class RegisterComponent implements OnInit {
   loading: boolean;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
+    private authenticationService: AuthenticationService,
   ) {}
 
   ngOnInit(): void {
@@ -23,6 +28,14 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmitted(): void {
-    console.log('Submitted');
+    this.loading = true;
+
+    const username: string = this.formGroup.controls.username.value;
+    const password: string = this.formGroup.controls.password.value;
+    const userForm: UserForm = new UserForm(username, password);
+
+    this.authenticationService.register(userForm).subscribe(_ => {
+        this.router.navigate(['/login']);
+    });
   }
 }
