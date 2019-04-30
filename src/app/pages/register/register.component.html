@@ -1,6 +1,7 @@
 <div class="center">
-        <form [formGroup]="formGroup" (ngSubmit)="onSubmitted()">
-            <h2><i class="fab fa-trello"></i></h2>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmitted()">
+        <h2><i class="fab fa-trello"></i></h2>
+        <div [loading]="loading">
             <div class="form">
                 <div class="form-group">
                     <label for="username">Username</label>
@@ -18,5 +19,6 @@
             <div class="button-group">
                 <button [disabled]="formGroup.isValid" class="btn btn-primary">Registrarse</button>
             </div>
-        </form>
+        </div>
+    </form>
     </div>

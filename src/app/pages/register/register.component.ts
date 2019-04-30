@@ -5,37 +5,38 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
 
-  formGroup: FormGroup;
-  loading: boolean;
+    formGroup: FormGroup;
+    loading: boolean;
 
-  constructor(
-    private router: Router,
-    private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService,
-  ) {}
+    constructor(
+        private router: Router,
+        private formBuilder: FormBuilder,
+        private authenticationService: AuthenticationService,
+    ) { }
 
-  ngOnInit(): void {
-    this.formGroup = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
+    ngOnInit(): void {
+        this.formGroup = this.formBuilder.group({
+            username: ['', Validators.required],
+            password: ['', Validators.required]
+        });
+    }
 
-  onSubmitted(): void {
-    this.loading = true;
+    onSubmitted(): void {
+        this.loading = true;
 
-    const username: string = this.formGroup.controls.username.value;
-    const password: string = this.formGroup.controls.password.value;
-    const userForm: UserForm = new UserForm(username, password);
+        const username: string = this.formGroup.controls.username.value;
+        const password: string = this.formGroup.controls.password.value;
+        const userForm: UserForm = new UserForm(username, password);
 
-    this.authenticationService.register(userForm).subscribe(_ => {
-        this.router.navigate(['/login']);
-    });
-  }
+        this.authenticationService.register(userForm).subscribe(_ => {
+            // Para evitar parpadeos por si llega la respuesta muy rápido del servidor
+            setTimeout(() => this.router.navigate(['/login']), 500);
+        });
+    }
 }
