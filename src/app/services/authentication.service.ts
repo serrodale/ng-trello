@@ -24,6 +24,10 @@ export class AuthenticationService {
         this.storedUser = storedUser;
     }
 
+    getStoredUser(): UserCredentials {
+        return this.storedUser;
+    }
+
     register(userForm: UserForm): Observable<any> {
         return this.httpClient.post(ENDPOINTS.register, userForm);
     }
