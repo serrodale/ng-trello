@@ -59,5 +59,14 @@ h2 {
         cursor: pointer;
         outline: 0;
     }
+
+    .switch {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        font-size: 13px;
+        color: #5c5f74;
+        text-decoration: none;
+    }
 }
 
