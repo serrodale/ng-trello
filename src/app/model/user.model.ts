@@ -4,3 +4,13 @@ export class UserForm {
         public password: string,
     ) {}
 }
+
+export class UserCredentials {
+    public username: string;
+    public jwt: string;
+
+    constructor(dto: any) {
+        this.username = dto.username;
+        this.jwt = dto.jwt;
+    }
+}
