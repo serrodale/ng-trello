@@ -1,0 +1,4 @@
+<p (click)="hide()" [ngClass]="getClasses()">
+    <i *ngIf="isSuccessAlert" class="fas fa-check"></i>
+    {{ alert.message }}
+</p>
