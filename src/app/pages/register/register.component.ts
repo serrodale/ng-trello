@@ -11,8 +11,9 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-    formGroup: FormGroup;
     loading: boolean;
+    submitted: boolean;
+    formGroup: FormGroup;
 
     constructor(
         private router: Router,
@@ -23,11 +24,25 @@ export class RegisterComponent implements OnInit {
     ngOnInit(): void {
         this.formGroup = this.formBuilder.group({
             username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
+            password: ['', Validators.required],
+            passwordConfirmation: ['', Validators.required]
+        }, { validator: this.comparePasswords });
+    }
+
+    comparePasswords(formGroup: FormGroup): any {
+        const password: string = formGroup.controls.password.value;
+        const passwordConfirmation: string = formGroup.controls.passwordConfirmation.value;
+
+        return password === passwordConfirmation ? null : { passwordsAreDifferent: true }     
     }
 
     onSubmitted(): void {
+        this.submitted = true;
+
+        if (this.formGroup.invalid) {
+            return;
+        }
+
         this.loading = true;
 
         const username: string = this.formGroup.controls.username.value;

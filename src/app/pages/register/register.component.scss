@@ -36,6 +36,21 @@ h2 {
             margin-bottom: 5px;
         }
 
+        .invalid-feedback {
+            font-size: 13px;
+            color: #730d0d;
+            margin-top: 5px;
+        }
+
+        .invalid-feedback div i {
+            font-size: 10px;
+        }
+
+        .invalid-feedback div span {
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+
         input {
             border-radius: 3px;
             border: none;
