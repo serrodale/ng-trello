@@ -1,30 +1,32 @@
 <div class="center">
     <form [formGroup]="formGroup" (ngSubmit)="onSubmitted()">
         <h2><i class="fab fa-trello"></i></h2>
-        <div class="form">
-            <div class="form-group">
-                <label for="username">Usuario</label>
-                <input type="text" formControlName="username" class="form-control" />
-                <div *ngIf="submitted" class="invalid-feedback">
-                    <div *ngIf="formGroup.controls.username.errors?.required">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <span>Este campo es obligatorio</span>
+        <div [loading]="loading">
+            <div class="form">
+                <div class="form-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" formControlName="username" class="form-control" />
+                    <div *ngIf="submitted" class="invalid-feedback">
+                        <div *ngIf="formGroup.controls.username.errors?.required">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Este campo es obligatorio</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" formControlName="password" class="form-control" />
+                    <div *ngIf="submitted" class="invalid-feedback">
+                        <div *ngIf="formGroup.controls.password.errors?.required">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Este campo es obligatorio</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" formControlName="password" class="form-control" />
-                <div *ngIf="submitted" class="invalid-feedback">
-                    <div *ngIf="formGroup.controls.password.errors?.required">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <span>Este campo es obligatorio</span>
-                    </div>
-                </div>
+            <div class="button-group">
+                <button [disabled]="formGroup.isValid" class="btn btn-primary">Entrar</button>
             </div>
-        </div>
-        <div class="button-group">
-            <button [disabled]="formGroup.isValid" class="btn btn-primary">Entrar</button>
         </div>
         <a routerLink="/register" class="switch">¿No tienes una cuenta? Clic aquí para registrarte</a>
     </form>

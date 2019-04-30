@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
+    loading: boolean;
     submitted: boolean;
     formGroup: FormGroup;
 
@@ -24,6 +25,12 @@ export class LoginComponent implements OnInit {
 
     onSubmitted(): void {
         this.submitted = true;
+
+        if (this.formGroup.invalid) {
+            return;
+        }
+
+        this.loading = true;
     }
 
 }
