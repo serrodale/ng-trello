@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserForm } from 'src/app/model/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
+import { SuccessAlert } from 'src/app/model/alert.model';
+import { AlertsService } from 'src/app/services/alerts.service';
 
 @Component({
     selector: 'app-register',
@@ -18,6 +20,7 @@ export class RegisterComponent implements OnInit {
     constructor(
         private router: Router,
         private formBuilder: FormBuilder,
+        private alertsService: AlertsService,
         private authenticationService: AuthenticationService,
     ) { }
 
@@ -51,7 +54,10 @@ export class RegisterComponent implements OnInit {
 
         this.authenticationService.register(userForm).subscribe(_ => {
             // Para evitar parpadeos por si llega la respuesta muy rápido del servidor
-            setTimeout(() => this.router.navigate(['/login']), 500);
+            setTimeout(() => {
+                this.router.navigate(['/login']);
+                this.alertsService.addSuccessAlert(new SuccessAlert('Usuario registrado correctamente'));
+            }, 500);
         });
     }
 }
