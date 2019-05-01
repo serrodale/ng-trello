@@ -44,6 +44,8 @@ export class AuthenticationService {
                         // Guardamos el usuario en el localStorage como un JSON parseado
                         const jsonParsedUser: string = JSON.stringify(user);
                         localStorage.setItem(this.localStorageKeyName, jsonParsedUser);
+
+                        this.storedUser = user;
                     }
 
                     return !!jwt;
