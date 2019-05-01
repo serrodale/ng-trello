@@ -27,6 +27,14 @@ header {
     overflow-x: scroll;
     height: 100vh;
 
+    app-list:first-child {
+        margin-left: 25px;
+    }
+
+    app-list + #new-list {
+        margin-left: 0;
+    }
+
     #new-list {
         margin-left: 25px;
         height: 50px;
