@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { AlertsService } from 'src/app/services/alerts.service';
@@ -11,7 +11,7 @@ import { ListsService } from 'src/app/services/lists.service';
     templateUrl: './board.component.html',
     styleUrls: ['./board.component.scss']
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit {
 
     lists: List[] = [];
 
@@ -20,7 +20,11 @@ export class BoardComponent {
         private listsService: ListsService,
         private alertsService: AlertsService,
         private authenticationService: AuthenticationService,
-    ) { }
+    ) {}
+
+    ngOnInit() {
+        this.getAllLists();
+    }
 
     onKeydown(keyCode: number, input: HTMLInputElement): void {
         const value: string = input.value;
@@ -40,6 +44,12 @@ export class BoardComponent {
         this.authenticationService.logout();
         this.router.navigate(['/login']);
         this.alertsService.addSuccessAlert(new SuccessAlert('Sesión cerrada'));
+    }
+
+    private getAllLists(): void {
+        this.listsService.getAllLists().subscribe((lists: List[]) => {
+            this.lists = lists;
+        });
     }
 
     private createList(name: string): void {
