@@ -4,3 +4,18 @@
         <a (click)="logout()" id="logout"><i class="fas fa-sign-out-alt"></i> Salir</a>
     </nav>
 </header>
+
+<div id="lists">
+    <app-list *ngFor="let list of lists" [list]="list" (delete)="onDeleteList($event)">
+        <div class="tasks">
+            <app-task *ngFor="let task of list.tasks" [task]="task" (delete)="onDeleteTask($event)"></app-task>
+        </div>
+    </app-list>
+
+    <input
+        #input
+        type="text"
+        id="new-list"
+        placeholder="Añadir lista..."
+        (keydown)="onKeydown($event.keyCode, input)" /> 
+</div>

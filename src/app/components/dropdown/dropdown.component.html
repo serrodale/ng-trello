@@ -1,0 +1,3 @@
+<div [ngClass]="{ dropdown: true, visible: isVisible }" #dropdownRef>
+    <p *ngFor="let option of options" (click)="onOptionClick(option)"><i [class]="option.icon"></i> {{ option.name }}</p>
+</div>

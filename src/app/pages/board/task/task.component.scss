@@ -1,0 +1,56 @@
+.task {
+    width: 100%;
+    padding: 10px 20px 10px 10px;
+    font-size: 14px;
+    border-radius: 3px;
+    background: #5d6076;
+    color: #fff;
+    margin: 0 0 13px;
+    position: relative;
+    animation: 0.5s ease-out 0s 1 fadeIn;
+
+    .task-content {
+        width: fit-content;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .delete {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        font-size: 11px;
+        cursor: pointer;
+        
+        &:hover {
+            opacity: 1;
+        }
+
+        i {
+            animation: 1s ease-out 0s 1 delayedSlideIn;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes delayedSlideIn {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
