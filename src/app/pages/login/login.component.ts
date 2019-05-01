@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
             // Para evitar parpadeos por si llega la respuesta muy rápido del servidor
             setTimeout(() => {
                 if (successfulLogin) {
-                    this.router.navigate(['/'])
+                    this.router.navigate(['/']);
                 } else {
                     this.alertsService.addErrorAlert(new ErrorAlert('Usuario o password erróneos'));
                     this.loading = false;
