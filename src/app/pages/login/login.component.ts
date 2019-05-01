@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit {
         const userForm: UserForm = new UserForm(username, password);
 
         this.authenticationService.login(userForm).subscribe(_ => {
-            setTimeout(() => this.router.navigate(['/']));
+            // Para evitar parpadeos por si llega la respuesta muy rápido del servidor
+            setTimeout(() => this.router.navigate(['/']), 500);
         });
     }
 

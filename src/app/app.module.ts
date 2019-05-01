@@ -9,10 +9,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoadingDirective } from './directives/loading.directive';
 import { AlertComponent } from './components/alert/alert.component';
 import { LoginComponent } from './pages/login/login.component';
+import { BoardComponent } from './pages/board/board.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    BoardComponent,
     LoginComponent,
     AlertComponent,
     LoadingDirective,

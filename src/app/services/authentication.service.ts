@@ -24,6 +24,10 @@ export class AuthenticationService {
         this.storedUser = storedUser;
     }
 
+    getStoredUser(): UserCredentials {
+        return this.storedUser;
+    }
+
     register(userForm: UserForm): Observable<any> {
         return this.httpClient.post(ENDPOINTS.register, userForm);
     }
@@ -42,6 +46,11 @@ export class AuthenticationService {
                     return user;
                 })
             );
+    }
+
+    logout(): void {
+        // Eliminamos del localStorage el usuario que había guardado
+        localStorage.removeItem(this.localStorageKeyName);
     }
 
 }
