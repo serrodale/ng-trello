@@ -11,10 +11,12 @@ import { AlertComponent } from './components/alert/alert.component';
 import { LoginComponent } from './pages/login/login.component';
 import { BoardComponent } from './pages/board/board.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { ListComponent } from './pages/board/list/list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ListComponent,
     BoardComponent,
     LoginComponent,
     AlertComponent,

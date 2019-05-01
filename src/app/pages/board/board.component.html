@@ -6,6 +6,7 @@
 </header>
 
 <div id="lists">
+    <app-list *ngFor="let list of lists" [list]="list"></app-list>
     <input
         #input
         type="text"
