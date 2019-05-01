@@ -6,7 +6,12 @@
 </header>
 
 <div id="lists">
-    <app-list *ngFor="let list of lists" [list]="list" (delete)="onDeleteList($event)"></app-list>
+    <app-list *ngFor="let list of lists" [list]="list" (delete)="onDeleteList($event)">
+        <div class="tasks">
+            <app-task *ngFor="let task of list.tasks" [task]="task"></app-task>
+        </div>
+    </app-list>
+
     <input
         #input
         type="text"
