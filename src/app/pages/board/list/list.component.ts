@@ -3,6 +3,8 @@ import { List } from 'src/app/model/list.model';
 import { ListsService } from 'src/app/services/lists.service';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { SuccessAlert } from 'src/app/model/alert.model';
+import { DropdownOption } from 'src/app/model/dropdown-option.model';
+import { Icon } from 'src/app/model/icon.model';
 
 @Component({
   selector: 'app-list',
@@ -14,7 +16,21 @@ export class ListComponent {
   @Input() list: List;
 
   isLoading: boolean;
+  showDropdown: boolean;
 
+  readonly options: DropdownOption[] = [
+    {
+      name: 'Vaciar lista',
+      icon: Icon.EMPTY,
+      callback: () => console.log('1'),
+    },
+    {
+      name: 'Eliminar lista',
+      icon: Icon.DELETE,
+      callback: () => console.log('2'),      
+    },
+  ];
+  
   constructor(
     private listsService: ListsService,
     private alertsService: AlertsService,

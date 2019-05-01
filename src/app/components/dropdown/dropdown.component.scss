@@ -1,0 +1,57 @@
+.dropdown {
+    background: #323440;
+    min-width: 200px;
+    border-radius: 3px;
+    position: fixed;
+    z-index: 1;
+    visibility: hidden;
+
+    &:after {
+        content: "";
+        position: absolute;
+        border-style: solid;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-color: transparent transparent #323440 transparent;
+    }
+    
+    p {
+        margin: 0;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 5px 10px;
+        display: flex;
+
+        &:hover {
+            background: #3d3f4d;
+        }
+        
+        &:first-child:hover {
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+        }
+        
+        &:last-child:hover {
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+        
+        &:not(:last-child) {
+            border-bottom: 1px solid #3d3f4d;
+        }
+        
+        i {
+            font-size: 11px;
+            margin: 3px 6px 0 0;
+            width: 10px;
+            text-align: center;
+        }
+    }
+    
+    &.visible {
+        visibility: visible;
+    }
+}

@@ -14,6 +14,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ListComponent } from './pages/board/list/list.component';
 import { EditableDirective } from './directives/editable.directive';
 import { TooltipDirective } from './directives/tooltip.directive';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { TooltipDirective } from './directives/tooltip.directive';
     LoadingDirective,
     RegisterComponent,
     EditableDirective,
+    DropdownComponent,
   ],
   imports: [
     BrowserModule,

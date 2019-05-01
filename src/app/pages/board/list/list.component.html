@@ -3,11 +3,20 @@
         <h2 [editable]="modifyList">{{ list.name }}</h2>
         <span>
             <i
-            class="fas fa-ellipsis-h"
-            tooltip="Opciones">
-            </i>
+                #iconRef
+                class="fas fa-ellipsis-h"
+                tooltip="Opciones"
+                (click)="showDropdown = true">
+              </i>
         </span>
     </div>
+
+    <app-dropdown
+        *ngIf="showDropdown"
+        [options]="options"
+        [parentElement]="iconRef"
+        (mouseleave)="showDropdown = false"
+    ></app-dropdown>
 
     <div class="body">
         tareas
