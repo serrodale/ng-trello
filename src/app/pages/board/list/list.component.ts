@@ -55,6 +55,7 @@ export class ListComponent {
     private modalsService: ModalsService,
   ) {
     this.modifyList = this.modifyList.bind(this);
+    this.deleteTasksOfList = this.deleteTasksOfList.bind(this);
   }
   
   ngOnInit() {
@@ -87,7 +88,16 @@ export class ListComponent {
   }
 
   deleteTasksOfList(): void {
-    console.log('deleteTasksOfList');
+    this.isLoading = true;
+
+    this.listsService.deleteTasksOfList(this.list.id).subscribe(_ => {
+      // Para evitar parpadeos por si llega la respuesta muy rápido del servidor
+      setTimeout(() => {
+        this.list.tasks = [];
+        this.isLoading = false;
+        this.alertsService.addSuccessAlert(new SuccessAlert('Tareas eliminadas'));
+      }, 500);
+    });
   }
 
   onKeydown(keyCode: number, input: HTMLInputElement): void {

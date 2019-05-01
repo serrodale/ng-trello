@@ -32,6 +32,10 @@ export class ListsService {
         );
     }
 
+    deleteTasksOfList(listId: number): Observable<any> {
+        return this.http.delete(ENDPOINTS.deleteTasksOfList(listId), { responseType: 'text' as 'json' });
+    }
+
     deleteList(id: number): Observable<any> {
         return this.http.delete(ENDPOINTS.deleteList(id));
     }
