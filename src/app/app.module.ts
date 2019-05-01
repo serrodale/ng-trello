@@ -13,6 +13,7 @@ import { BoardComponent } from './pages/board/board.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ListComponent } from './pages/board/list/list.component';
 import { EditableDirective } from './directives/editable.directive';
+import { TooltipDirective } from './directives/tooltip.directive';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { EditableDirective } from './directives/editable.directive';
     BoardComponent,
     LoginComponent,
     AlertComponent,
+    TooltipDirective,
     LoadingDirective,
     RegisterComponent,
     EditableDirective,

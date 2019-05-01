@@ -1,6 +1,12 @@
 <div class="list" [loading]="isLoading">
     <div class="header">
         <h2 [editable]="modifyList">{{ list.name }}</h2>
+        <span>
+            <i
+            class="fas fa-ellipsis-h"
+            tooltip="Opciones">
+            </i>
+        </span>
     </div>
 
     <div class="body">
