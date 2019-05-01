@@ -19,13 +19,15 @@
     ></app-dropdown>
 
     <div class="body">
-        tareas
+        <ng-content></ng-content>
     </div>
 
     <div class="footer">
         <input
+            #input
             type="text"
             placeholder="Añadir tarea..."
-            spellcheck="false" />
+            spellcheck="false"
+            (keydown)="onKeydown($event.keyCode, input)" />
     </div>
 </div>

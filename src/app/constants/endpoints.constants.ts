@@ -7,4 +7,5 @@ export const ENDPOINTS = {
     createList: `${environment.serverUrl}/list`,
     modifyList: (id: number) => `${environment.serverUrl}/list/${id}`,
     deleteList: (id: number) => `${environment.serverUrl}/list/${id}`,
+    createTask: `${environment.serverUrl}/tasks`,
 }

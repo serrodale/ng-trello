@@ -7,6 +7,8 @@ import { DropdownOption } from 'src/app/model/dropdown-option.model';
 import { Icon } from 'src/app/model/icon.model';
 import { ModalsService } from 'src/app/services/modals.service';
 import { ConfirmationModal } from 'src/app/model/modal.model';
+import { TasksService } from 'src/app/services/tasks.service';
+import { Task } from 'src/app/model/task.model';
 
 @Component({
   selector: 'app-list',
@@ -48,6 +50,7 @@ export class ListComponent {
   
   constructor(
     private listsService: ListsService,
+    private tasksService: TasksService,
     private alertsService: AlertsService,
     private modalsService: ModalsService,
   ) {
@@ -75,6 +78,27 @@ export class ListComponent {
 
   deleteTasksOfList(): void {
     console.log('deleteTasksOfList');
+  }
+
+  onKeydown(keyCode: number, input: HTMLInputElement): void {
+    const value: string = input.value;
+    
+    // Solo nos interesa la tecla enter y que el valor del input no sea una cadena vacía
+    if (keyCode !== 13 || !value.trim()) {
+      return;
+    }
+    
+    this.createTask(value);
+
+    // Reseteamos el valor para que se borre el contenido que había antes
+    input.value = '';
+  }
+
+  private createTask(name: string): void {
+    this.tasksService.createTask(name, this.list.id).subscribe((task: Task) => {
+      this.list.tasks.push(task);
+      this.alertsService.addSuccessAlert(new SuccessAlert('Tarea creada'));
+    });
   }
 
 }
