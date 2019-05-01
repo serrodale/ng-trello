@@ -16,10 +16,12 @@ import { EditableDirective } from './directives/editable.directive';
 import { TooltipDirective } from './directives/tooltip.directive';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { TaskComponent } from './pages/board/task/task.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    TaskComponent,
     ListComponent,
     BoardComponent,
     ModalComponent,
