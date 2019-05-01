@@ -1,0 +1,63 @@
+header {
+    background: #292a36;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 25px;
+    
+    #logo {
+        font-size: 22px;
+    }
+    
+    #logout {
+        cursor: pointer;
+        font-size: 14px;
+        
+        i {
+            font-size: 11px;
+            margin-right: 3px;
+        }
+    }
+}
+
+#lists {
+    display: flex;
+    margin: 25px 0;
+    overflow-x: scroll;
+    height: 100vh;
+
+    app-list:first-child {
+        margin-left: 25px;
+    }
+
+    app-list + #new-list {
+        margin-left: 0;
+    }
+
+    #new-list {
+        margin-left: 25px;
+        height: 50px;
+        background: none;
+        border: none;
+        font-size: 1.5em;
+        width: 275px;
+        font-family: inherit;
+        font-weight: bold;
+        color: #fff; 
+        margin-right: 25px;
+        
+        &:focus {
+            outline: none;
+        }
+        
+        &::placeholder {
+            color: #4d5064;
+        }
+    }
+}
+
+.tasks {
+    min-height: 1px;
+    padding-top: 12px;
+}

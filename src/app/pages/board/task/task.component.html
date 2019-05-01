@@ -1,0 +1,20 @@
+<article
+    class="task"
+    [loading]="isLoading"
+	(mouseenter)="showIcon = true"
+	(mouseleave)="showIcon = false">
+        <div
+            class="task-content"
+            [editable]="modifyTask">
+                {{ task.task }}
+        </div>
+        
+        <span class="delete">
+            <i
+                *ngIf="showIcon"
+                class="fas fa-trash-alt"
+                tooltip="Eliminar tarea"
+                (click)="showModalOfDeleteTaskConfirmation()">
+            </i>
+        </span>
+</article>
