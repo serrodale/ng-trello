@@ -34,18 +34,19 @@ export class AuthenticationService {
         return this.http.post(ENDPOINTS.register, userForm);
     }
 
-    login(userForm: UserForm): Observable<UserCredentials> {
+    login(userForm: UserForm): Observable<boolean> {
         return this.http.post<string>(ENDPOINTS.login, userForm, {responseType: 'text' as 'json'})
             .pipe(
                 map((jwt: string) => {
-                    // Si llegamos aquí es porque el login es válido
-                    const user: UserCredentials = { username: userForm.username, jwt };
+                    if (jwt) {
+                        const user: UserCredentials = { username: userForm.username, jwt };
+    
+                        // Guardamos el usuario en el localStorage como un JSON parseado
+                        const jsonParsedUser: string = JSON.stringify(user);
+                        localStorage.setItem(this.localStorageKeyName, jsonParsedUser);
+                    }
 
-                    // Guardamos el usuario en el localStorage como un JSON parseado
-                    const jsonParsedUser: string = JSON.stringify(user);
-                    localStorage.setItem(this.localStorageKeyName, jsonParsedUser);
-
-                    return user;
+                    return !!jwt;
                 })
             );
     }
