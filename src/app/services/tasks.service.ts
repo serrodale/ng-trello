@@ -14,6 +14,12 @@ export class TasksService {
         private http: HttpClient,
     ) {}
 
+    getTasksOfList(listId: number): Observable<Task[]> {
+        return this.http.get(ENDPOINTS.getTasksOfList(listId)).pipe(
+            map((tasksDto: any[]) => tasksDto ? tasksDto.map((taskDto: any) => new Task(taskDto)) : []),
+        );
+    }
+
     createTask(task: string, listId: number): Observable<Task> {
         return this.http.post(ENDPOINTS.createTask, { task, idlist: listId }).pipe(
             map((taskDto: any) => new Task(taskDto)),

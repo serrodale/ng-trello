@@ -56,6 +56,16 @@ export class ListComponent {
   ) {
     this.modifyList = this.modifyList.bind(this);
   }
+  
+  ngOnInit() {
+    this.getTasks();
+  }
+
+  private getTasks(): void {
+    this.tasksService.getTasksOfList(this.list.id).subscribe((tasks: Task[]) => {
+      this.list.tasks = tasks || [];
+    });
+  }
 
   modifyList(name: string): void {
     this.isLoading = true;
