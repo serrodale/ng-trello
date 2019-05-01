@@ -48,4 +48,9 @@ export class AuthenticationService {
             );
     }
 
+    logout(): void {
+        // Eliminamos del localStorage el usuario que había guardado
+        localStorage.removeItem(this.localStorageKeyName);
+    }
+
 }
