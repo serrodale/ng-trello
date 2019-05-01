@@ -1,0 +1,22 @@
+header {
+    background: #292a36;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 25px;
+}
+
+#logo {
+    font-size: 22px;
+}
+
+#logout {
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#logout i {
+    font-size: 11px;
+    margin-right: 3px;
+}
