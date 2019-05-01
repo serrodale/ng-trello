@@ -7,6 +7,8 @@ import { List } from 'src/app/model/list.model';
 import { ListsService } from 'src/app/services/lists.service';
 import { Task } from 'src/app/model/task.model';
 import { DragulaService } from 'ng2-dragula';
+import { BoardDistributionService } from 'src/app/services/board-distribution.service';
+import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
     selector: 'app-board',
@@ -19,10 +21,12 @@ export class BoardComponent implements OnInit {
 
     constructor(
         private router: Router,
+        private tasksService: TasksService,
         private listsService: ListsService,
         private alertsService: AlertsService,
         private dragulaService: DragulaService,
         private authenticationService: AuthenticationService,
+        private boardDistributionService: BoardDistributionService,
     ) {}
 
     ngOnInit() {
@@ -72,6 +76,48 @@ export class BoardComponent implements OnInit {
           moves: (_, __, handle: Element) => {
             return !handle.className.includes('task-content');
           }
+        });
+
+        this.dragulaService.dropModel().subscribe(async (dragulaEvent: any) => {
+            // Para evitar tener varios if/else anidados
+            let updateBoardDistribution: boolean = true;
+      
+            if (dragulaEvent.name === 'tasks') {
+              // Dragula no se encarga de actualizar el atributo listId de la tarea movida; si la
+              // movemos de lista, únicamente quita la tarea de la lista en la que se encontraba y
+              // la pone en el array de tareas que se corresponde con el de la nueva. Así que
+              // tenemos que cambiar este atributo manualmente. Para saber su nuevo valor, 
+              // buscamos la nueva lista en el array de listas con findListWhereIsTask, que hace
+              // falta que sea asíncrono porque cuando se lanza este evento, todavía no se ha modificado
+              // el atributo lists porque todavía no se ha ejecutado un ciclo del change detection
+              const modifiedTask: Task = dragulaEvent.item;
+              const modifiedTaskId: number = modifiedTask.id;
+              const targetList: List = await this.findListWhereIsTask(modifiedTaskId);
+              
+              // Comprobamos si se ha cambiado de lista
+              if (modifiedTask.listId !== targetList.id) {
+                // Porque ya lo actualizaremos al completar la llamada de modifyListIdOfTask 
+                updateBoardDistribution = false;
+      
+                // Actualizamos la BBDD
+                this.tasksService.modifyListIdOfTask(modifiedTask.id, targetList.id).subscribe(_ => {
+                  this.boardDistributionService.update(this.lists);
+                });
+              }
+            }
+      
+            if (updateBoardDistribution) {
+                // Hace falta cuando se mueven las listas para que se actualice this.lists
+                setTimeout(() => this.boardDistributionService.update(this.lists));
+            }
+          });
+    }
+
+    private findListWhereIsTask(taskId: number): Promise<List> {
+        return new Promise((resolve: Function, reject: Function) => {
+          setTimeout(() => {
+            resolve(this.lists.find((list: List) => !!list.tasks.find((task: Task) => task.id === taskId)));
+          });
         });
     }
 
