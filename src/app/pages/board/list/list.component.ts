@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { List } from 'src/app/model/list.model';
 import { ListsService } from 'src/app/services/lists.service';
 import { AlertsService } from 'src/app/services/alerts.service';
@@ -16,6 +16,7 @@ import { ConfirmationModal } from 'src/app/model/modal.model';
 export class ListComponent {
 
   @Input() list: List;
+  @Output() delete: EventEmitter<number> = new EventEmitter();
 
   isLoading: boolean;
   showDropdown: boolean;
@@ -27,7 +28,7 @@ export class ListComponent {
       callback: () => this.modalsService.addConfirmationModal(
         new ConfirmationModal(
           'Se borrarán todas las tareas de la lista. ¿Desea continuar?',
-          () => console.log('1'),
+          () => this.deleteTasksOfList(),
           'Continuar',
         )
       ),
@@ -35,7 +36,13 @@ export class ListComponent {
     {
       name: 'Eliminar lista',
       icon: Icon.DELETE,
-      callback: () => console.log('2'),      
+      callback: () => this.modalsService.addConfirmationModal(
+        new ConfirmationModal(
+          'Se borrará la lista y sus tareas. ¿Desea continuar?',
+          () => this.deleteList(),
+          'Continuar',
+        )
+      ),
     },
   ];
   
@@ -57,6 +64,17 @@ export class ListComponent {
         this.alertsService.addSuccessAlert(new SuccessAlert('Lista modificada'));
       }, 500);
     });
+  }
+
+  deleteList(): void {
+    this.listsService.deleteList(this.list.id).subscribe(_ => {
+      this.delete.emit(this.list.id);
+      this.alertsService.addSuccessAlert(new SuccessAlert('Lista eliminada'));
+    });
+  }
+
+  deleteTasksOfList(): void {
+    console.log('deleteTasksOfList');
   }
 
 }

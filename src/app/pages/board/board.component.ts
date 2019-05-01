@@ -46,6 +46,10 @@ export class BoardComponent implements OnInit {
         this.alertsService.addSuccessAlert(new SuccessAlert('Sesión cerrada'));
     }
 
+    onDeleteList(id: number): void {
+        this.lists = this.lists.filter((list: List) => list.id !== id);
+    }
+
     private getAllLists(): void {
         this.listsService.getAllLists().subscribe((lists: List[]) => {
             this.lists = lists;

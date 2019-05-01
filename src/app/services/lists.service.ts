@@ -32,4 +32,8 @@ export class ListsService {
         );
     }
 
+    deleteList(id: number): Observable<any> {
+        return this.http.delete(ENDPOINTS.deleteList(id));
+    }
+
 }
