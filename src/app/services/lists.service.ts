@@ -26,4 +26,10 @@ export class ListsService {
         );
     }
 
+    modifyList(id: number, name: string): Observable<List> {
+        return this.http.put(ENDPOINTS.modifyList(id), { name }).pipe(
+            map((listDto: any) => new List(listDto)),
+        );
+    }
+
 }

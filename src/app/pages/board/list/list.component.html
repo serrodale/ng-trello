@@ -1,6 +1,6 @@
-<div class="list">
+<div class="list" [loading]="isLoading">
     <div class="header">
-        <h2>{{ list.name }}</h2>
+        <h2 [editable]="modifyList">{{ list.name }}</h2>
     </div>
 
     <div class="body">
