@@ -65,6 +65,10 @@ export class BoardComponent implements OnInit {
     }
 
     private setDragulaConfig(): void {
+        // Porque si se crea existiendo uno, da error
+        this.dragulaService.destroy('lists');
+        this.dragulaService.destroy('tasks');
+
         this.dragulaService.createGroup('lists', {
           direction: 'horizontal',
           moves: (_, __, handle: Element) => {

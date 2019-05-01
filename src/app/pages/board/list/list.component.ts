@@ -9,6 +9,7 @@ import { ModalsService } from 'src/app/services/modals.service';
 import { ConfirmationModal } from 'src/app/model/modal.model';
 import { TasksService } from 'src/app/services/tasks.service';
 import { Task } from 'src/app/model/task.model';
+import { BoardDistributionService } from 'src/app/services/board-distribution.service';
 
 @Component({
   selector: 'app-list',

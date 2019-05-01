@@ -53,6 +53,13 @@ export class BoardDistributionService {
     const listOrder: ListOrder = this.findListOrderById(listId);
     const tasksOrder: number[] = listOrder.tasksOrder;
 
+    // Para la primera vez que se crea la distribución
+    if (tasks.length > 0 && tasksOrder.length === 0) {
+      tasks.forEach((task: Task) => this.addTask(task));
+
+      return tasks;
+    }
+
     return tasksOrder.map((taskId: number) => tasks.find((task: Task) => task.id === taskId));
   }
 
