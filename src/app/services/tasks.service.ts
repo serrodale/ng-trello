@@ -25,5 +25,11 @@ export class TasksService {
             map((taskDto: any) => new Task(taskDto)),
         );
     }
+
+    modifyTask(id: number, task: string): Observable<number> {
+        return this.http.put(ENDPOINTS.modifyTask(id), { task }).pipe(
+            map((numberOfTasksModified: number) => numberOfTasksModified)
+        );
+    }
     
 }

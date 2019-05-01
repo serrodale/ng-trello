@@ -1,5 +1,9 @@
-<article class="task">
-	<div class="task-content">
-		{{ task.task }}
-	</div>
+<article
+    class="task"
+    [loading]="isLoading">
+        <div
+            class="task-content"
+            [editable]="modifyTask">
+                {{ task.task }}
+        </div>
 </article>
