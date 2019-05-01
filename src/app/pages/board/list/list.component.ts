@@ -5,6 +5,8 @@ import { AlertsService } from 'src/app/services/alerts.service';
 import { SuccessAlert } from 'src/app/model/alert.model';
 import { DropdownOption } from 'src/app/model/dropdown-option.model';
 import { Icon } from 'src/app/model/icon.model';
+import { ModalsService } from 'src/app/services/modals.service';
+import { ConfirmationModal } from 'src/app/model/modal.model';
 
 @Component({
   selector: 'app-list',
@@ -22,7 +24,13 @@ export class ListComponent {
     {
       name: 'Vaciar lista',
       icon: Icon.EMPTY,
-      callback: () => console.log('1'),
+      callback: () => this.modalsService.addConfirmationModal(
+        new ConfirmationModal(
+          'Se borrarán todas las tareas de la lista. ¿Desea continuar?',
+          () => console.log('1'),
+          'Continuar',
+        )
+      ),
     },
     {
       name: 'Eliminar lista',
@@ -34,6 +42,7 @@ export class ListComponent {
   constructor(
     private listsService: ListsService,
     private alertsService: AlertsService,
+    private modalsService: ModalsService,
   ) {
     this.modifyList = this.modifyList.bind(this);
   }

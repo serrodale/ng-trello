@@ -15,12 +15,14 @@ import { ListComponent } from './pages/board/list/list.component';
 import { EditableDirective } from './directives/editable.directive';
 import { TooltipDirective } from './directives/tooltip.directive';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
     BoardComponent,
+    ModalComponent,
     LoginComponent,
     AlertComponent,
     TooltipDirective,

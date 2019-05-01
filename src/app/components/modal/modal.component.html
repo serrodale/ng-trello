@@ -1,0 +1,13 @@
+<div class="modal-background" (click)="closeModal()"></div>
+
+<div class="modal">
+  <div class="header">
+    <i [class]="modal.icon"></i>
+    {{ modal.content }}
+  </div>
+  
+  <div class="footer">
+    <span (click)="closeModal()">Cerrar</span>
+    <span *ngIf="isConfirmationModal" class="cta-button" (click)="onAccept()">{{ modal.acceptButtonText }}</span>
+  </div>
+</div>
