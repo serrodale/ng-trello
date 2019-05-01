@@ -5,6 +5,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { ErrorAlert } from 'src/app/model/alert.model';
+import { HttpErrorsService } from 'src/app/services/http-errors.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-login',
@@ -21,14 +23,13 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private formBuilder: FormBuilder,
         private alertsService: AlertsService,
+        private httpErrorsService: HttpErrorsService,
         private authenticationService: AuthenticationService,
     ) {}
 
     ngOnInit(): void {
-        this.formGroup = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
+        this.subscribeToHttpErrors();
+        this.createForm();
     }
 
     onSubmitted(): void {
@@ -50,10 +51,26 @@ export class LoginComponent implements OnInit {
                 if (successfulLogin) {
                     this.router.navigate(['/']);
                 } else {
-                    this.alertsService.addErrorAlert(new ErrorAlert('Usuario o password erróneos'));
+                    this.alertsService.addErrorAlert(new ErrorAlert('El usuario no existe'));
                     this.loading = false;
                 }
             }, 500);
+        });
+    }
+
+    private subscribeToHttpErrors(): void {
+        this.httpErrorsService.errors$.subscribe((error: HttpErrorResponse) => {
+            if (error.status === 401) {
+                this.alertsService.addErrorAlert(new ErrorAlert('Password incorrecto'));
+                this.loading = false;
+            }
+        });
+    }
+
+    private createForm(): void {
+        this.formGroup = this.formBuilder.group({
+            username: ['', Validators.required],
+            password: ['', Validators.required]
         });
     }
 

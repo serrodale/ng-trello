@@ -18,6 +18,7 @@ import { TooltipDirective } from './directives/tooltip.directive';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { TaskComponent } from './pages/board/task/task.component';
+import { HttpErrorsInterceptor } from './interceptors/http-errors.interceptor';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { TaskComponent } from './pages/board/task/task.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorsInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
