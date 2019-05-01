@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SuccessAlert, Alert } from '../model/alert.model';
+import { SuccessAlert, Alert, ErrorAlert } from '../model/alert.model';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -14,6 +14,14 @@ export class AlertsService {
   alerts$: Observable<Alert[]> = this.alertsSubject.asObservable();
 
   addSuccessAlert(alert: SuccessAlert): void {
+    // Asignamos al alert un nuevo id para saber cuál
+    alert.id = this.alertId++;
+
+    this.alerts.push(alert);
+    this.alertsSubject.next(this.alerts);
+  }
+
+  addErrorAlert(alert: ErrorAlert): void {
     // Asignamos al alert un nuevo id para saber cuál
     alert.id = this.alertId++;
 

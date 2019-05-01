@@ -6,6 +6,7 @@ p {
     z-index: 2;
     transition: all 0.15s ease-in-out;
     transform: translateY(0);
+    color: #fff;
 
     i {
         font-size: 10px;
@@ -15,7 +16,10 @@ p {
 
 .success {
     background: #559955;
-    color: #fff;
+}
+
+.error {
+    background: #964646;
 }
 
 .show,

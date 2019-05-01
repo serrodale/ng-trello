@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserForm } from 'src/app/model/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
+import { AlertsService } from 'src/app/services/alerts.service';
+import { ErrorAlert } from 'src/app/model/alert.model';
 
 @Component({
     selector: 'app-login',
@@ -18,6 +20,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private router: Router,
         private formBuilder: FormBuilder,
+        private alertsService: AlertsService,
         private authenticationService: AuthenticationService,
     ) {}
 
@@ -41,9 +44,16 @@ export class LoginComponent implements OnInit {
         const password: string = this.formGroup.controls.password.value;
         const userForm: UserForm = new UserForm(username, password);
 
-        this.authenticationService.login(userForm).subscribe(_ => {
+        this.authenticationService.login(userForm).subscribe((successfulLogin: boolean) => {
             // Para evitar parpadeos por si llega la respuesta muy rápido del servidor
-            setTimeout(() => this.router.navigate(['/']), 500);
+            setTimeout(() => {
+                if (successfulLogin) {
+                    this.router.navigate(['/'])
+                } else {
+                    this.alertsService.addErrorAlert(new ErrorAlert('Usuario o password erróneos'));
+                    this.loading = false;
+                }
+            }, 500);
         });
     }
 

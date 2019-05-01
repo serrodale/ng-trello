@@ -18,6 +18,7 @@ export class AlertComponent implements OnInit {
   readonly autoHideDelay: number = 1000;
   readonly cssAnimationHideDelay: number = 150;
 
+  isErrorAlert: boolean;
   isSuccessAlert: boolean;
 
   constructor(
@@ -25,6 +26,7 @@ export class AlertComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isErrorAlert = this.alert.type === AlertType.ERROR;
     this.isSuccessAlert = this.alert.type === AlertType.SUCCESS;
     this.className = this.isSuccessAlert ? 'success' : 'error';
 
