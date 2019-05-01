@@ -4,3 +4,12 @@
         <a (click)="logout()" id="logout"><i class="fas fa-sign-out-alt"></i> Salir</a>
     </nav>
 </header>
+
+<div id="lists">
+    <input
+        #input
+        type="text"
+        id="new-list"
+        placeholder="Añadir lista..."
+        (keydown)="onKeydown($event.keyCode, input)" /> 
+</div>
