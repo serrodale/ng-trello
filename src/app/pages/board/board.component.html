@@ -5,9 +5,9 @@
     </nav>
 </header>
 
-<div id="lists">
+<div id="lists" dragula="lists" [(dragulaModel)]="lists">
     <app-list *ngFor="let list of lists" [list]="list" (delete)="onDeleteList($event)">
-        <div class="tasks">
+        <div class="tasks" dragula="tasks" [(dragulaModel)]="list.tasks">
             <app-task *ngFor="let task of list.tasks" [task]="task" (delete)="onDeleteTask($event)"></app-task>
         </div>
     </app-list>

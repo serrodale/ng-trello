@@ -6,6 +6,7 @@ import { SuccessAlert } from 'src/app/model/alert.model';
 import { List } from 'src/app/model/list.model';
 import { ListsService } from 'src/app/services/lists.service';
 import { Task } from 'src/app/model/task.model';
+import { DragulaService } from 'ng2-dragula';
 
 @Component({
     selector: 'app-board',
@@ -20,10 +21,12 @@ export class BoardComponent implements OnInit {
         private router: Router,
         private listsService: ListsService,
         private alertsService: AlertsService,
+        private dragulaService: DragulaService,
         private authenticationService: AuthenticationService,
     ) {}
 
     ngOnInit() {
+        this.setDragulaConfig();
         this.getAllLists();
     }
 
@@ -55,6 +58,21 @@ export class BoardComponent implements OnInit {
         const taskId: number = task.id;
         const listWhereTaskBelongs: List = this.lists.find((list: List) => list.id === task.listId);
         listWhereTaskBelongs.tasks = listWhereTaskBelongs.tasks.filter((task: Task) => task.id !== taskId);
+    }
+
+    private setDragulaConfig(): void {
+        this.dragulaService.createGroup('lists', {
+          direction: 'horizontal',
+          moves: (_, __, handle: Element) => {
+            return !handle.className.includes('task') && !handle.className.includes('task-content');
+          }
+        });
+    
+        this.dragulaService.createGroup('tasks', {
+          moves: (_, __, handle: Element) => {
+            return !handle.className.includes('task-content');
+          }
+        });
     }
 
     private getAllLists(): void {
