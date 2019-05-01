@@ -5,6 +5,7 @@ import { AlertsService } from 'src/app/services/alerts.service';
 import { SuccessAlert } from 'src/app/model/alert.model';
 import { List } from 'src/app/model/list.model';
 import { ListsService } from 'src/app/services/lists.service';
+import { Task } from 'src/app/model/task.model';
 
 @Component({
     selector: 'app-board',
@@ -48,6 +49,12 @@ export class BoardComponent implements OnInit {
 
     onDeleteList(id: number): void {
         this.lists = this.lists.filter((list: List) => list.id !== id);
+    }
+
+    onDeleteTask(task: Task): void {
+        const taskId: number = task.id;
+        const listWhereTaskBelongs: List = this.lists.find((list: List) => list.id === task.listId);
+        listWhereTaskBelongs.tasks = listWhereTaskBelongs.tasks.filter((task: Task) => task.id !== taskId);
     }
 
     private getAllLists(): void {

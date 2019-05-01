@@ -8,7 +8,7 @@
 <div id="lists">
     <app-list *ngFor="let list of lists" [list]="list" (delete)="onDeleteList($event)">
         <div class="tasks">
-            <app-task *ngFor="let task of list.tasks" [task]="task"></app-task>
+            <app-task *ngFor="let task of list.tasks" [task]="task" (delete)="onDeleteTask($event)"></app-task>
         </div>
     </app-list>
 

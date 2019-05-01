@@ -31,5 +31,9 @@ export class TasksService {
             map((numberOfTasksModified: number) => numberOfTasksModified)
         );
     }
+
+    deleteTask(id: number, listId: number): Observable<void> {
+        return this.http.delete<void>(ENDPOINTS.deleteTask(id));
+    }
     
 }
